@@ -13,7 +13,7 @@ interface SendGridInterface
     /**
      * @var string
      */
-    const NAME = 'sengrid';
+    const NAME = 'sendgrid';
 
     /**
      * @param string $to
