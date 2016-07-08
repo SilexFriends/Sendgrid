@@ -1,5 +1,5 @@
 {
-  "name" : "SilexFriends/SendGrid",
+  "name" : "silexfriends/sendgrid",
   "description" : "Silex SendGrid Provider",
   "license" : "GPLv3",
   "type": "library",
