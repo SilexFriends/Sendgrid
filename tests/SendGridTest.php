@@ -1,7 +1,7 @@
 <?php
-namespace MrPrompt\Silex\Tests;
+namespace SilexFriends\SendGrid\Tests;
 
-use MrPrompt\Silex\SendGrid;
+use SilexFriends\SendGrid\SendGrid;
 use PHPUnit_Framework_TestCase;
 use Silex\Application;
 

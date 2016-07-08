@@ -1,5 +1,5 @@
 <?php
-namespace MrPrompt\Silex;
+namespace SilexFriends\SendGrid;
 
 use SendGrid as Sender;
 use SendGrid\Email;

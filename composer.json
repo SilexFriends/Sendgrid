@@ -1,16 +1,16 @@
 {
-  "name" : "mrprompt/silex-sendgrid",
+  "name" : "SilexFriends/SendGrid",
   "description" : "Silex SendGrid Provider",
   "license" : "GPLv3",
   "type": "library",
   "autoload" : {
     "psr-4" : {
-      "MrPrompt\\Silex\\": "src/"
+      "SilexFriends\\SendGrid\\": "src/"
     }
   },
   "autoload-dev" : {
     "psr-4" : {
-      "MrPrompt\\Silex\\Tests\\": "tests/"
+      "SilexFriends\\SendGrid\\Tests\\": "tests/"
     }
   },
   "authors" : [
