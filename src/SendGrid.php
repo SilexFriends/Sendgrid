@@ -63,7 +63,7 @@ final class SendGrid implements SendGridInterface, ServiceProviderInterface
         try {
             $apiKey = $this->config['api_key'];
 
-            $email  = new Email();
+            $email  = new Email("", $to);
             $email
                 ->addTo($to)
                 ->setFrom($from)
