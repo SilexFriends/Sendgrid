@@ -64,13 +64,11 @@ final class SendGrid implements SendGridInterface, ServiceProviderInterface
         try {
             $apiKey = $this->config['api_key'];
 
-            $mail = new Mail($from, ' ', $to, ' ');
-            $mail
-                ->setTemplateId($template)
-                ->setSubstitutions($tags);
+            $mail = new Mail($from, ' ', $to, ' ', $tags);
+            $mail->setTemplateId($template);
 
             $sender = new Sender($apiKey);
-            $sender->send($mail);
+            $sender->client->mail()->send($mail);
 
             return true;
         } catch (Exception $ex) {
