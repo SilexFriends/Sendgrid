@@ -3,6 +3,7 @@ namespace SilexFriends\SendGrid;
 
 use SendGrid as Sender;
 use SendGrid\Email;
+use SendGrid\Mail;
 use SendGrid\Exception;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -63,17 +64,13 @@ final class SendGrid implements SendGridInterface, ServiceProviderInterface
         try {
             $apiKey = $this->config['api_key'];
 
-            $email  = new Email("", $to);
-            $email
-                ->addTo($to)
-                ->setFrom($from)
-                ->setSubject(' ')
-                ->setHtml(' ')
+            $mail = new Mail($from, ' ', $to, ' ');
+            $mail
                 ->setTemplateId($template)
                 ->setSubstitutions($tags);
 
             $sender = new Sender($apiKey);
-            $sender->send($email);
+            $sender->send($mail);
 
             return true;
         } catch (Exception $ex) {
