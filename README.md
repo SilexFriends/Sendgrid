@@ -15,12 +15,10 @@ composer require mrprompt/silex-sendgrid
 ```
 use SilexFriends\SendGrid\SendGrid as SendGridServiceProvider;
 
-$app->register(
-    new SendGridServiceProvider(
-        $api_name,
-        $api_key
-    )
-);
+$app->register(new SendGridServiceProvider(), [
+    'sendgrid.api_name' => '{your api name}',
+    'sendgrid.api_key' => '{your api key}'
+]);
 
 $app['sendgrid'](
     'foo@bar.bar', // to
