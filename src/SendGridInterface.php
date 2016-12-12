@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace SilexFriends\SendGrid;
@@ -11,15 +12,11 @@ namespace SilexFriends\SendGrid;
 interface SendGridInterface
 {
     /**
-     * @var string
-     */
-    const NAME = 'sendgrid';
-
-    /**
      * @param string $to
      * @param string $from
      * @param string $template
-     * @param array $tags
+     * @param array  $tags
+     * 
      * @return boolean
      */
     public function send(string $to, string $from, string $template, array $tags = []): bool;

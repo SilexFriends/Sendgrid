@@ -25,11 +25,11 @@
     "php": ">=7.0",
     "ext-curl": "*",
     "ext-json": "*",
+    "silex/silex": "~1.3",
     "sendgrid/sendgrid": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.1",
-    "silex/silex": "~1.3",
     "codeclimate/php-test-reporter": "dev-master"
   }
 }

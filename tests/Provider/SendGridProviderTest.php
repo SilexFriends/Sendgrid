@@ -1,7 +1,7 @@
 <?php
-namespace SilexFriends\SendGrid\Tests;
+namespace SilexFriends\SendGrid\Tests\Provider;
 
-use SilexFriends\SendGrid\SendGrid;
+use SilexFriends\SendGrid\Provider\SendGridProvider;
 use PHPUnit_Framework_TestCase;
 use Silex\Application;
 
@@ -10,7 +10,7 @@ use Silex\Application;
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-class SendGridTest extends PHPUnit_Framework_TestCase
+class SendGridProviderTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Application
@@ -27,8 +27,11 @@ class SendGridTest extends PHPUnit_Framework_TestCase
         $api_name = getenv('SENDGRID_API_NAME');
         $api_key  = getenv('SENDGRID_API_KEY');
 
-        $app     = new Application;
-        $app->register(new SendGrid($api_name, $api_key));
+        $app = new Application;
+        $app->register(new SendGridProvider(), [
+            'sendgrid.api_name' => $api_name,
+            'sendgrid.api_key' => $api_key,
+        ]);
 
         $this->app = $app;
     }
@@ -51,7 +54,7 @@ class SendGridTest extends PHPUnit_Framework_TestCase
         $email      = getenv('SENDGRID_EMAIL');
         $template   = getenv('SENDGRID_TEMPLATE_ID');
 
-        $result     = $this->app[SendGrid::NAME]($email, $email, $template, []);
+        $result     = $this->app['sendgrid']($email, $email, $template);
 
         $this->assertTrue($result);
     }
@@ -64,7 +67,7 @@ class SendGridTest extends PHPUnit_Framework_TestCase
         $email      = getenv('SENDGRID_EMAIL');
         $template   = 'foo';
 
-        $result     = $this->app[SendGrid::NAME]($email, $email, $template, []);
+        $result     = $this->app['sendgrid']($email, $email, $template);
 
         $this->assertTrue($result);
     }
@@ -77,7 +80,7 @@ class SendGridTest extends PHPUnit_Framework_TestCase
         $email      = 'foo';
         $template   = getenv('SENDGRID_TEMPLATE_ID');
 
-        $result     = $this->app[SendGrid::NAME]($email, $email, $template, []);
+        $result     = $this->app['sendgrid']($email, $email, $template);
 
         $this->assertTrue($result);
     }

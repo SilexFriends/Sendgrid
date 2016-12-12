@@ -1,24 +1,30 @@
 <?php
+
+declare(strict_types = 1);
+
 namespace SilexFriends\SendGrid;
 
 use SendGrid as Sender;
 use SendGrid\Email;
 use SendGrid\Mail;
 use SendGrid\Exception;
-use Silex\Application;
-use Silex\ServiceProviderInterface;
 
 /**
- * SendGrid Service Provider
+ * SendGrid Adapter
  *
  * @author Thiago Paes <mrprompt@gmail.com>
  */
-final class SendGrid implements SendGridInterface, ServiceProviderInterface
+final class SendGrid implements SendGridInterface
 {
     /**
-     * @var array
+     * @var string
      */
-    private $config;
+    private $apiName;
+
+    /**
+     * @var string
+     */
+    private $apiKey;
 
     /**
      * SendGrid constructor.
@@ -28,32 +34,8 @@ final class SendGrid implements SendGridInterface, ServiceProviderInterface
      */
     public function __construct(string $name, string $key)
     {
-        $this->config = [
-            'api_name' => $name,
-            'api_key'  => $key,
-        ];
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Silex\ServiceProviderInterface::register()
-     */
-    public function register(Application $app)
-    {
-        $app[static::NAME] = $app->protect(
-            function ($to, $from, $template, $tags) {
-                return $this->send($to, $from, $template, $tags);
-            }
-        );
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Silex\ServiceProviderInterface::boot()
-     */
-    public function boot(Application $app)
-    {
-        // :)
+        $this->apiName = $name;
+        $this->apiKey = $key;
     }
 
     /**
@@ -62,12 +44,11 @@ final class SendGrid implements SendGridInterface, ServiceProviderInterface
     public function send(string $to, string $from, string $template, array $tags = []): bool
     {
         try {
-            $apiKey = $this->config['api_key'];
 
             $mail = new Mail($from, ' ', $to, ' ', $tags);
             $mail->setTemplateId($template);
 
-            $sender = new Sender($apiKey);
+            $sender = new Sender($this->apiKey);
             $sender->client->mail()->send($mail);
 
             return true;
